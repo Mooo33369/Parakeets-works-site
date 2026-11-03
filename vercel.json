@@ -1,0 +1,18 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "nextjs",
+  "headers": [
+    {
+      "source": "/(opengraph-image|apple-icon)",
+      "headers": [{ "key": "Content-Type", "value": "image/png" }]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.parakeets-works.jp" }],
+      "destination": "https://parakeets-works.jp/:path*",
+      "permanent": true
+    }
+  ]
+}

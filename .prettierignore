@@ -1,0 +1,7 @@
+pnpm-lock.yaml
+.next/
+supabase/.temp/
+playwright-report/
+test-results/
+# ドキュメントは手で整形する（表の揃えなどを崩さないため）
+*.md

@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-sans);
+}
+
+@theme {
+  /* 落ち着いた紺を基調にする */
+  --color-navy-950: #0b1a33;
+  --color-navy-900: #10264a;
+  --color-navy-800: #1a3561;
+  --color-navy-700: #26487d;
+  --color-navy-100: #e6ebf3;
+  --color-navy-50: #f4f6fa;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--color-white);
+  color: var(--color-slate-800);
+  font-feature-settings: "palt";
+}

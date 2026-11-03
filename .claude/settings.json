@@ -1,0 +1,14 @@
+{
+  "extraKnownMarketplaces": {
+    "claude-config": {
+      "source": {
+        "source": "github",
+        "repo": "Mooo33369/claude-config"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "core@claude-config": true,
+    "saas-stack@claude-config": true
+  }
+}
