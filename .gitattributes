@@ -1,0 +1,4 @@
+# 改行コードを LF にそろえる（Prettier の既定と合わせ、Windows で全ファイルが変更扱いになるのを防ぐ）
+* text=auto eol=lf
+*.png binary
+*.ico binary
