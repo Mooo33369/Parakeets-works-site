@@ -16,7 +16,7 @@ export const business = {
   /** 事業の内容。サービスが増えても書き換えずに済むよう、分野で書く */
   activities: ["業務システムの開発・提供"],
   description:
-    "Parakeets works は、業務システムの開発・提供を行う事業者です。現場の業務を支えるクラウドサービスを提供しています。",
+    "Parakeets works は、業務システムの開発・提供を行う事業者です。現在、警備会社向けのクラウドサービスの提供に向けて開発を進めています。",
 } as const;
 
 export type Service = {
