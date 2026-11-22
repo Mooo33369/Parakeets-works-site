@@ -11,11 +11,14 @@ RisshoCloud と同じ構成にしている。データベース・認証・問�
 | ファイル | 内容 |
 |---|---|
 | `src/content/site.ts` | 掲載内容（屋号・所在地・連絡先）とサービスの一覧、ロゴ・OGP 画像のパス。**文言の変更はここだけ** |
-| `src/app/page.tsx` | ページ本体 |
+| `src/app/page.tsx` | トップページ |
+| `src/app/services/[slug]/page.tsx` | サービスの詳細ページ（`services` の `detail` から作る。例: `/services/risshocloud`） |
+| `src/components/site-parts.tsx` | 節の見出し・フッター（両ページで共通） |
 | `src/app/layout.tsx` | `<title>`・meta description・OGP |
 | `public/logo-white.svg` | ヘッダーのロゴ（紺の背景用の白抜き横組み） |
 | `public/ogp.png` | 共有したときの画像（1200×630） |
 | `src/app/icon.svg` / `favicon.ico` / `apple-icon.png` | タブのアイコン / 古いブラウザ用 / iPhone 用アイコン（180px） |
+| `public/brand/risshocloud/` | 立哨クラウドの白抜きロゴ（詳細ページの見出し）・アプリアイコン（トップページのサービス欄）・共有用の画像（詳細ページ）。元の素材は RisshoCloud リポジトリの `docs/brand/rissho-cloud_logo_kit/`。パスは `services` の `brand` |
 | `brand/` | ロゴキットの元素材一式（Issue #3 の添付）。サイトには上の複製だけを出す |
 | `vercel.json` | www → ルートのリダイレクト |
 
@@ -25,11 +28,34 @@ RisshoCloud と同じ構成にしている。データベース・認証・問�
 
 ### サービスを追加する
 
-`src/content/site.ts` の `services` に要素を足す。`url` を省略すると「サイトは準備中です」と表示され、入れるとリンクになる。
+`src/content/site.ts` の `services` に要素を足す。`url` を入れるとサービスのサイトへのリンクになる。
+`detail` を入れると `/services/{slug}` に詳細ページ（概要・課題・機能・料金・導入の流れ・画面イメージ・今後の予定・お問い合わせ）ができ、トップページからリンクされ、sitemap にも載る。`url` も `detail` もないときは「サイトは準備中です」と表示する。
 
 ```ts
-{ name: "立哨クラウド", summary: "…", url: "https://example.jp" },
+{ name: "立哨クラウド", summary: "…", url: "https://example.jp", detail: { slug: "risshocloud", … } },
 ```
+
+### 文言を途中で改行する
+
+`src/content/site.ts` の文言に `\n` を入れると、ページではその位置で改行する。meta description・OGP の説明文では改行を取り除く（`toMetaText`）。
+
+```ts
+description: "1文目です。\n2文目です。",
+```
+
+### 画面イメージを追加する
+
+1. 撮ったままのキャプチャは `screenshots-original/{slug}/` に置く（Git の管理外。公開しない）
+2. 縮小・切り出しをして `public/screenshots/{slug}/` に置く（PC の画面は幅 1280px、スマホの画面は幅 640px 程度の PNG）
+3. `src/content/site.ts` の `detail.screenshots` に足す。スマホの画面は `mobile: true` を付けると幅を狭くして表示する。空のあいだは「画面イメージ」の節を表示しない
+
+```ts
+screenshots: [
+  { src: "/screenshots/risshocloud/shifts.png", alt: "シフト作成の画面…", width: 1280, height: 1090, caption: "シフト作成。…" },
+],
+```
+
+キャプチャはサンプルデータで撮り（RisshoCloud の Issue #71）、`screenshotsNote` でサンプルであることを書く。
 
 ## コマンド
 

@@ -1,15 +1,13 @@
-import { brandAssets, business, services, telHref } from "@/content/site";
+import Link from "next/link";
 
-function SectionHeading({ id, children }: { id: string; children: string }) {
-  return (
-    <h2
-      id={id}
-      className="border-l-4 border-navy-800 pl-3 text-lg font-bold tracking-wide text-navy-900 sm:text-xl"
-    >
-      {children}
-    </h2>
-  );
-}
+import { SectionHeading, SiteFooter } from "@/components/site-parts";
+import {
+  brandAssets,
+  business,
+  servicePath,
+  services,
+  telHref,
+} from "@/content/site";
 
 export default function Home() {
   const profile: { label: string; value: React.ReactNode }[] = [
@@ -80,7 +78,7 @@ export default function Home() {
               className="h-auto w-full max-w-72 sm:max-w-96"
             />
           </h1>
-          <p className="mt-6 max-w-xl text-sm leading-7 text-navy-100 sm:text-base sm:leading-8">
+          <p className="mt-6 max-w-xl text-sm leading-7 whitespace-pre-line text-navy-100 sm:text-base sm:leading-8">
             {business.description}
           </p>
         </div>
@@ -95,13 +93,32 @@ export default function Home() {
                 key={service.name}
                 className="rounded-md border border-slate-200 bg-navy-50 p-5 sm:p-6"
               >
-                <h3 className="text-base font-bold text-navy-900 sm:text-lg">
+                <h3 className="flex items-center gap-3 text-base font-bold text-navy-900 sm:text-lg">
+                  {service.brand && (
+                    // サービス名を隣に書くので、アイコンは読み上げない（alt を空にする）
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={service.brand.icon.src}
+                      width={service.brand.icon.width}
+                      height={service.brand.icon.height}
+                      alt=""
+                      className="size-10 shrink-0 sm:size-11"
+                    />
+                  )}
                   {service.name}
                 </h3>
-                <p className="mt-2 text-sm leading-7 sm:text-base">
+                <p className="mt-3 text-sm leading-7 whitespace-pre-line sm:text-base">
                   {service.summary}
                 </p>
-                <p className="mt-4 text-sm">
+                <p className="mt-4 flex flex-col gap-2 text-sm sm:flex-row sm:gap-6">
+                  {service.detail && (
+                    <Link
+                      href={servicePath(service.detail)}
+                      className="font-medium text-navy-700 underline underline-offset-4 hover:text-navy-900"
+                    >
+                      機能・料金・導入の流れを見る
+                    </Link>
+                  )}
                   {service.url ? (
                     <a
                       href={service.url}
@@ -112,7 +129,9 @@ export default function Home() {
                       {service.name}のサイトを見る
                     </a>
                   ) : (
-                    <span className="text-slate-500">サイトは準備中です</span>
+                    !service.detail && (
+                      <span className="text-slate-500">サイトは準備中です</span>
+                    )
                   )}
                 </p>
               </li>
@@ -157,11 +176,7 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="border-t border-slate-200 bg-navy-50">
-        <p className="mx-auto max-w-3xl px-5 py-6 text-center text-xs text-slate-600">
-          © {new Date().getFullYear()} {business.name}
-        </p>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }
