@@ -178,9 +178,17 @@ export default async function ServicePage({
         {detail.screenshots.length > 0 && (
           <section aria-labelledby="screenshots">
             <SectionHeading id="screenshots">画面イメージ</SectionHeading>
-            <div className="mt-6 space-y-8">
+            {detail.screenshotsNote && (
+              <p className="mt-6 text-sm whitespace-pre-line text-slate-600">
+                ※ {detail.screenshotsNote}
+              </p>
+            )}
+            <div className="mt-6 space-y-10">
               {detail.screenshots.map((shot) => (
-                <figure key={shot.src}>
+                <figure
+                  key={shot.src}
+                  className={shot.mobile ? "mx-auto max-w-xs" : undefined}
+                >
                   {/* 静的出力のため next/image の最適化は使わない */}
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img

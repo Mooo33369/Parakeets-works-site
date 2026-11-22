@@ -48,3 +48,6 @@ next-env.d.ts
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# 撮ったままのキャプチャ（縮小・切り出し前の元画像）。公開しない
+/screenshots-original/

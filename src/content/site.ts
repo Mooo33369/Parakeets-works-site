@@ -55,6 +55,8 @@ export type Screenshot = {
   width: number;
   height: number;
   caption: string;
+  /** スマートフォンの画面。幅を狭くして表示する */
+  mobile?: boolean;
 };
 
 /** サービスの詳細ページ（/services/[slug]）に出す内容 */
@@ -76,6 +78,8 @@ export type ServiceDetail = {
   flow: readonly { title: string; description: string }[];
   /** 画面イメージ。空のあいだは節ごと表示しない */
   screenshots: readonly Screenshot[];
+  /** 画面イメージの節の冒頭に出す注記（サンプルデータであることなど） */
+  screenshotsNote?: string;
   /** 今後の予定 */
   roadmap: readonly string[];
 };
@@ -205,7 +209,51 @@ export const services: readonly Service[] = [
           description: "お試しのあと、本契約に切り替えてご利用いただけます。",
         },
       ],
-      screenshots: [],
+      screenshots: [
+        {
+          src: "/screenshots/risshocloud/shifts.png",
+          alt: "シフト作成の画面。月のカレンダーで日ごとの配置の状況を確認でき、現場ごとに勤務枠の数と人数の不足・警告が表示されている",
+          width: 1280,
+          height: 1090,
+          caption:
+            "シフト作成。日ごとの配置の状況と、現場ごとの人数の不足・警告を一覧で確認できます。",
+        },
+        {
+          src: "/screenshots/risshocloud/placement-check.png",
+          alt: "現場のシフトの画面。夜勤の勤務枠に割り当てた隊員に「6連勤目」「勤務可能時間外」の警告が表示されている",
+          width: 1200,
+          height: 1320,
+          caption:
+            "配置のチェック。連続勤務や、隊員の勤務可能時間外の割り当てを自動で警告します。",
+        },
+        {
+          src: "/screenshots/risshocloud/public-view-mobile.png",
+          alt: "隊員向けのシフト表の画面（スマートフォン）。週を選び、現場ごとに日付・時間・配置された隊員が表示されている",
+          width: 640,
+          height: 1385,
+          caption:
+            "隊員向けのシフト表（スマートフォン）。\nログイン不要の閲覧用 URL から確認できます。",
+          mobile: true,
+        },
+        {
+          src: "/screenshots/risshocloud/reports.png",
+          alt: "月次集計の画面。隊員ごとの勤務日数・中止・実働時間・深夜時間の表と、CSV ダウンロードのボタンが表示されている",
+          width: 1280,
+          height: 800,
+          caption:
+            "月次集計。締め日に合わせて隊員ごとの勤務実績を集計し、CSV ファイルで出力できます。",
+        },
+        {
+          src: "/screenshots/risshocloud/availabilities.png",
+          alt: "勤務可能日の入力の画面。週ごとに、隊員ごとの勤務できる時間が表で表示されている",
+          width: 1280,
+          height: 800,
+          caption:
+            "勤務可能日の入力。隊員ごとに勤務できる日時を週単位で管理します。",
+        },
+      ],
+      screenshotsNote:
+        "画面に表示している会社名・隊員名・現場などは、説明用のサンプルデータです。",
       roadmap: ["上番・下番の報告", "給与計算", "LINE への自動配信"],
     },
   },

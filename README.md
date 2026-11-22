@@ -45,14 +45,17 @@ description: "1文目です。\n2文目です。",
 
 ### 画面イメージを追加する
 
-1. キャプチャを `public/screenshots/{slug}/` に置く（例: `public/screenshots/risshocloud/shift.png`。幅 1280px 程度の PNG）
-2. `src/content/site.ts` の `detail.screenshots` に足す。空のあいだは「画面イメージ」の節を表示しない
+1. 撮ったままのキャプチャは `screenshots-original/{slug}/` に置く（Git の管理外。公開しない）
+2. 縮小・切り出しをして `public/screenshots/{slug}/` に置く（PC の画面は幅 1280px、スマホの画面は幅 640px 程度の PNG）
+3. `src/content/site.ts` の `detail.screenshots` に足す。スマホの画面は `mobile: true` を付けると幅を狭くして表示する。空のあいだは「画面イメージ」の節を表示しない
 
 ```ts
 screenshots: [
-  { src: "/screenshots/risshocloud/shift.png", alt: "シフト作成画面", width: 1280, height: 800, caption: "シフト作成画面" },
+  { src: "/screenshots/risshocloud/shifts.png", alt: "シフト作成の画面…", width: 1280, height: 1090, caption: "シフト作成。…" },
 ],
 ```
+
+キャプチャはサンプルデータで撮り（RisshoCloud の Issue #71）、`screenshotsNote` でサンプルであることを書く。
 
 ## コマンド
 

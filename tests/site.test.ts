@@ -111,6 +111,12 @@ describe("サービスの詳細ページ", () => {
     expect(brand!.ogImage).toMatchObject({ width: 1200, height: 630 });
   });
 
+  it("立哨クラウドの画面イメージが2枚以上あり、サンプルデータだと注記している", () => {
+    const detail = risshoCloud!.detail!;
+    expect(detail.screenshots.length).toBeGreaterThanOrEqual(2);
+    expect(detail.screenshotsNote).toContain("サンプル");
+  });
+
   it("画面イメージの画像が public/ にある", () => {
     for (const { detail } of servicesWithDetail()) {
       for (const shot of detail.screenshots) {
