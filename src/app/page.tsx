@@ -1,4 +1,4 @@
-import { business, services, telHref } from "@/content/site";
+import { brandAssets, business, services, telHref } from "@/content/site";
 
 function SectionHeading({ id, children }: { id: string; children: string }) {
   return (
@@ -69,8 +69,16 @@ export default function Home() {
           <p className="text-sm tracking-[0.2em] text-navy-100">
             業務システムの開発・提供
           </p>
-          <h1 className="mt-3 text-3xl font-bold tracking-wide sm:text-4xl">
-            {business.name}
+          <h1 className="mt-4">
+            {/* 静的出力のため next/image の最適化は使わない */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={brandAssets.headerLogo.src}
+              width={brandAssets.headerLogo.width}
+              height={brandAssets.headerLogo.height}
+              alt={business.name}
+              className="h-auto w-full max-w-72 sm:max-w-96"
+            />
           </h1>
           <p className="mt-6 max-w-xl text-sm leading-7 text-navy-100 sm:text-base sm:leading-8">
             {business.description}

@@ -1,12 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "nextjs",
-  "headers": [
-    {
-      "source": "/(opengraph-image|apple-icon)",
-      "headers": [{ "key": "Content-Type", "value": "image/png" }]
-    }
-  ],
   "redirects": [
     {
       "source": "/:path*",

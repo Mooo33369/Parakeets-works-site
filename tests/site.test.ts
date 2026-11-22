@@ -1,6 +1,9 @@
+import { existsSync } from "node:fs";
+import { join } from "node:path";
+
 import { describe, expect, it } from "vitest";
 
-import { business, services, telHref } from "@/content/site";
+import { brandAssets, business, services, telHref } from "@/content/site";
 
 describe("サイトの内容", () => {
   it("Issue の掲載内容がそろっている", () => {
@@ -17,6 +20,13 @@ describe("サイトの内容", () => {
   it("サービスの URL は https で始まる（設定されている場合）", () => {
     for (const service of services) {
       if (service.url) expect(service.url).toMatch(/^https:\/\//);
+    }
+  });
+
+  it("ロゴと共有用の画像が public/ にある", () => {
+    for (const asset of Object.values(brandAssets)) {
+      expect(asset.src).toMatch(/^\//);
+      expect(existsSync(join(process.cwd(), "public", asset.src))).toBe(true);
     }
   });
 

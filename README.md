@@ -10,12 +10,18 @@ RisshoCloud と同じ構成にしている。データベース・認証・問�
 
 | ファイル | 内容 |
 |---|---|
-| `src/content/site.ts` | 掲載内容（屋号・所在地・連絡先）とサービスの一覧。**文言の変更はここだけ** |
+| `src/content/site.ts` | 掲載内容（屋号・所在地・連絡先）とサービスの一覧、ロゴ・OGP 画像のパス。**文言の変更はここだけ** |
 | `src/app/page.tsx` | ページ本体 |
 | `src/app/layout.tsx` | `<title>`・meta description・OGP |
-| `src/app/opengraph-image.tsx` | 共有したときの画像（ビルド時に PNG を出力） |
-| `src/app/icon.svg` / `apple-icon.tsx` | favicon / iPhone 用アイコン |
-| `vercel.json` | www → ルートのリダイレクト、OGP 画像の Content-Type |
+| `public/logo-white.svg` | ヘッダーのロゴ（紺の背景用の白抜き横組み） |
+| `public/ogp.png` | 共有したときの画像（1200×630） |
+| `src/app/icon.svg` / `favicon.ico` / `apple-icon.png` | タブのアイコン / 古いブラウザ用 / iPhone 用アイコン（180px） |
+| `brand/` | ロゴキットの元素材一式（Issue #3 の添付）。サイトには上の複製だけを出す |
+| `vercel.json` | www → ルートのリダイレクト |
+
+### ロゴ・アイコンを差し替える
+
+`brand/` の素材を更新し、使う分を上の表の場所に同じ名前でコピーする。ファイル名を変えるときは `src/content/site.ts` の `brandAssets` も直す。
 
 ### サービスを追加する
 
