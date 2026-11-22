@@ -19,6 +19,17 @@ export const business = {
     "Parakeets works は、業務システムの開発・提供を行う事業者です。現在、警備会社向けのクラウドサービスの提供に向けて開発を進めています。",
 } as const;
 
+/**
+ * ロゴと共有用の画像。ファイルは public/ に置き、元の素材一式は brand/ にある。
+ * width・height は画像の縦横比（表示サイズは CSS で決める）
+ */
+export const brandAssets = {
+  /** ヘッダー（紺の背景）に出す白抜きの横組みロゴ */
+  headerLogo: { src: "/logo-white.svg", width: 530, height: 124 },
+  /** LINE などで共有したときに出る画像 */
+  ogImage: { src: "/ogp.png", width: 1200, height: 630 },
+} as const;
+
 export type Service = {
   name: string;
   /** 対象と内容を1〜2文で */
